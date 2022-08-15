@@ -13,16 +13,16 @@ pipeline {
 			   }
 		 }
 		 
-	/*stage('Build') {
+	stage('Build') {
 			 steps {
 				bat  'cd target &  del gaming.war & cd ..' 
 				bat 'mvn clean package'
 			   }
 		 } 
-	    */
+	    
 	stage('Dockerization') {
 			 steps {
-				/*script{
+				script{
 					app = docker.build(registry)
 				
 					docker.withRegistry('', registryCredential ) 
@@ -31,7 +31,6 @@ pipeline {
 						app.push("latest")
 					 }
 				}
-				 */
 				
 				bat 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_gaming:latest'
 			   }
