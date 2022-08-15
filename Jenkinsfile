@@ -32,7 +32,9 @@ pipeline {
 					 }
 				}
 				 
-				sh 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_gaming:latest'
+				bat 'docker stop mytomcat'
+				bat 'docker rm mytomcat' 
+				bat 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_gaming:latest'
 			   }
 		 }	 
 	    
