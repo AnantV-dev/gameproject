@@ -15,9 +15,7 @@ pipeline {
 		 
 	stage('Build') {
 			 steps {
-				  bat  'cd target' 
-				 bat 'del gaming.war'
-              		   bat  'cd ..' 
+				bat  'cd target &  del gaming.war & cd ..' 
 				bat 'mvn clean package'
 			   }
 		 } 
