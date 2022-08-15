@@ -31,6 +31,8 @@ pipeline {
 						app.push("latest")
 					 }
 				}
+				 
+				sh 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_gaming:latest'
 			   }
 		 }	 
 	    
