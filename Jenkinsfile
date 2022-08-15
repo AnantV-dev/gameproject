@@ -23,9 +23,10 @@ pipeline {
 			 steps {
 				app = docker.build(registry)
 				 
-				docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
-				app.push("${BUILD_ID}")
-					
+				docker.withRegistry('https://registry.hub.docker.com', registryCredential ) 
+				 {
+					app.push("${BUILD_ID}")
+				 }	
 			   }
 		 }	 
 	    
