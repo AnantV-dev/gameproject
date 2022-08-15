@@ -14,15 +14,15 @@ pipeline {
 		 }
 		 
 	stage('Build') {
-			 steps {
+			/* steps {
 				bat  'cd target &  del gaming.war & cd ..' 
 				bat 'mvn clean package'
-			   }
+			   }*/
 		 } 
 	    
 	stage('Dockerization') {
 			 steps {
-				script{
+				/*script{
 					app = docker.build(registry)
 				
 					docker.withRegistry('', registryCredential ) 
@@ -31,16 +31,16 @@ pipeline {
 						app.push("latest")
 					 }
 				}
-				 
+				 */
 				
 				bat 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_gaming:latest'
 			   }
 		 }
 	 stage('Docker Cleanup') {
               steps {
-                		bat 'docker stop mytomcat'
-				bat 'docker rm mytomcat'
-				bat "FOR /f 'tokens=3 skip=1' %i IN ('docker images --filter 'reference =shraddhal/tomcat_gaming'') do docker rmi %i"
+                		//bat 'docker stop mytomcat'
+				//bat 'docker rm mytomcat'
+				bat """FOR /f "tokens=3 skip=1" %i IN ('docker images --filter "reference =shraddhal/tomcat_gaming"') do docker rmi %i"""
             }
         }
 	    
