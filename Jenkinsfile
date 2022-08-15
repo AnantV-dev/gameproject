@@ -13,13 +13,13 @@ pipeline {
 			   }
 		 }
 		 
-	stage('Build') {
-			/* steps {
+	/*stage('Build') {
+			 steps {
 				bat  'cd target &  del gaming.war & cd ..' 
 				bat 'mvn clean package'
-			   }*/
+			   }
 		 } 
-	    
+	    */
 	stage('Dockerization') {
 			 steps {
 				/*script{
