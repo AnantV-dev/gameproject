@@ -25,7 +25,7 @@ pipeline {
 				script{
 					app = docker.build(registry)
 				
-					docker.withRegistry('https://registry.hub.docker.com', registryCredential ) 
+					docker.withRegistry('', registryCredential ) 
 					 {
 						app.push("${BUILD_ID}")
 						app.push("latest")
