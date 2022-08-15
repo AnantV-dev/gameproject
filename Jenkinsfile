@@ -15,9 +15,7 @@ pipeline {
 		 
 	stage('Build') {
 			 steps {
-				 bat 'del target/gaming.war'
-              		   bat  'del /f target/gaming' 
-				bat 'mvn clean package'
+				bat 'mvn  package'
 			   }
 		 } 
 	    
