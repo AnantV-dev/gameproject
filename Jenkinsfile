@@ -21,9 +21,9 @@ pipeline {
 	    
 	stage('Dockerization') {
 			 steps {
-				app = docker.build(registry)
-				 
 				script{
+					app = docker.build(registry)
+				
 					docker.withRegistry('https://registry.hub.docker.com', registryCredential ) 
 					 {
 						app.push("${BUILD_ID}")
