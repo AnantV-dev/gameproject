@@ -28,6 +28,7 @@ pipeline {
 					docker.withRegistry('https://registry.hub.docker.com', registryCredential ) 
 					 {
 						app.push("${BUILD_ID}")
+						app.push("latest")
 					 }
 				}
 			   }
