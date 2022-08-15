@@ -40,7 +40,7 @@ pipeline {
               steps {
                 		bat 'docker stop mytomcat'
 				bat 'docker rm mytomcat'
-				bat 'FOR /f "tokens=3 skip=1" %i IN ('docker images --filter "reference =shraddhal/tomcat_gaming"') do docker rmi %i'
+				bat "FOR /f "tokens=3 skip=1" %i IN ('docker images --filter "reference =shraddhal/tomcat_gaming"') do docker rmi %i"
             }
         }
 	    
