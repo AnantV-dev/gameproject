@@ -7,11 +7,11 @@ pipeline {
     }
 	
     stages {
-        stage('Clone') {
+        /*stage('Clone') {
 			 steps {	       
 				git 'https://github.com/shraddhaL/jenkinspipeline.git'
 			   }
-		 }
+		 }*/
 		 
 	stage('Build') {
 			 steps {
