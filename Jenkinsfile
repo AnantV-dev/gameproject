@@ -62,10 +62,7 @@ pipeline {
 	
 	post{
 		always{
-				input {
-				message "Terraform Destroy"
-				ok "Destroy"
-			    }
+				input(message: "Terraform Destroy", ok: "Destroy")
 			 withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'access'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'secret')]) {
 				bat '''cd terraform
 				terraform destroy -auto-approve'''	
