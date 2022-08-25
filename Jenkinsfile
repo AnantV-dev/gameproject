@@ -4,6 +4,8 @@ pipeline {
     environment {
         registry = "shraddhal/tomcat_gaming"
 	registryCredential = "docker_hub"
+	AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
 	
     stages {
@@ -49,7 +51,7 @@ pipeline {
 			withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'access'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'secret')]) {
 				bat '''cd terraform
 				terraform init
-				terraform plan -var "access=${access}" -var "secret=${secret}"
+				terraform plan
 				terraform apply -var "access=$access" -var "secret=$secret" -auto-approve'''	
 			}
 				
