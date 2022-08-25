@@ -44,7 +44,7 @@ pipeline {
 				bat """FOR /f "tokens=3 skip=1" %%i IN ('docker images --filter "reference =shraddhal/tomcat_gaming"') do docker rmi -f %%i"""
             }
         }
-	  */   
+	    
 	    
 	   stage('Deploy') {//Terraform Provision and Configure
               steps {
@@ -57,9 +57,7 @@ pipeline {
 				
 	      }
         }
-	    
-	    }
-	    
+	 */    
     }
 	
 	post{
@@ -74,3 +72,4 @@ pipeline {
 			}
 		}
 	}
+}
