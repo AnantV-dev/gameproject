@@ -64,6 +64,12 @@ resource "aws_security_group" "ec2" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }  
+ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]         
   }
 }
 
@@ -74,7 +80,7 @@ resource "null_resource" "copy_file" {
 
   connection {
     type     = "ssh"
-    user     = "ec2-user"
+    user     = "root"
     private_key = tls_private_key.my_key.private_key_pem
     host     = aws_instance.server.public_ip
   }
@@ -84,7 +90,7 @@ resource "null_resource" "copy_file" {
     destination = "/tmp/gaming.war"
     connection {
       type     = "ssh"
-      user     = "ec2-user"
+      user     = "root"
       private_key = tls_private_key.my_key.private_key_pem
       host     = aws_instance.server.public_ip
       }
