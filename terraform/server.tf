@@ -25,7 +25,7 @@ data "aws_ami" "ubuntu" {
 
  resource "aws_instance" "server" {
    ami           = data.aws_ami.ubuntu.id
-   key_name	= var.key
+   key_name	= aws_key_pair.key_name
    instance_type = "t3.micro"
    user_data=<<-EOF
    #!/bin/bash
