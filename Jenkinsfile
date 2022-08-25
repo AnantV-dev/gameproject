@@ -47,7 +47,7 @@ pipeline {
 	   stage('Deploy') {//Terraform Provision and Configure
               steps {
 			withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'access'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'secret')]) {
-				sh '''cd terraform
+				bat '''cd terraform
 				terraform init
 				terraform plan -auto-approve
 				terraform apply -var "access=$access" -var "secret=$secret" -auto-approve'''	
@@ -62,7 +62,7 @@ pipeline {
 		    }
 		    steps {
 			withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'access'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'secret')]) {
-				sh '''cd terraform
+				bat '''cd terraform
 				terraform destroy -var "access=$access" -var "secret=$secret" -auto-approve'''	
 			}
 		    }  
