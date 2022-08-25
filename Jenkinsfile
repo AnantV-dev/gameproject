@@ -6,6 +6,7 @@ pipeline {
 	registryCredential = "docker_hub"
 	AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+	uuidver = UUID.randomUUID().toString()
     }
 	
     stages {
@@ -14,7 +15,12 @@ pipeline {
 				git 'https://github.com/shraddhaL/jenkinspipeline.git'
 			   }
 		 }
-		 
+	    
+	stage('UUID gen') {
+	    steps {
+			bat 'echo $uuidver> src/main/webapp/version.html'
+       	    }
+        }
 	stage('Build') {
 			 steps {
 				bat  'cd target &  del gaming.war & cd ..' 
