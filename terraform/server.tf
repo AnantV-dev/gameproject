@@ -80,7 +80,7 @@ resource "null_resource" "copy_file" {
 
   connection {
     type     = "ssh"
-    user     = "root"
+    user     = "ubuntu"
     private_key = tls_private_key.my_key.private_key_pem
     host     = aws_instance.server.public_ip
   }
@@ -90,7 +90,7 @@ resource "null_resource" "copy_file" {
     destination = "/tmp/gaming.war"
     connection {
       type     = "ssh"
-      user     = "root"
+      user     = "ubuntu"
       private_key = tls_private_key.my_key.private_key_pem
       host     = aws_instance.server.public_ip
       }
