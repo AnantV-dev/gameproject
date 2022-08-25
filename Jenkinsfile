@@ -44,7 +44,7 @@ pipeline {
 				bat """FOR /f "tokens=3 skip=1" %%i IN ('docker images --filter "reference =shraddhal/tomcat_gaming"') do docker rmi -f %%i"""
             }
         }
-	  
+	  */   
 	    
 	   stage('Deploy') {//Terraform Provision and Configure
               steps {
@@ -57,17 +57,21 @@ pipeline {
 				
 	      }
         }
-	   */   stage('Terraform Destroy') {
-		    input {
-			message "Terraform Destroy"
-			ok "Destroy"
-		    }
-		    steps {
-			withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'access'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'secret')]) {
+	    
+	    }
+	    
+    }
+	
+	post{
+		always{
+				input {
+				message "Terraform Destroy"
+				ok "Destroy"
+			    }
+			 withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'access'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'secret')]) {
 				bat '''cd terraform
 				terraform destroy -auto-approve'''	
 			}
-		    }  
-	    }
-    }
+		}
+	}
 }
