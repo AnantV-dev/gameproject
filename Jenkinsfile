@@ -18,7 +18,7 @@ pipeline {
 	    
 	stage('UUID gen') {
 	    steps {
-			bat 'echo $uuidver> src/main/webapp/version.html'
+		    bat 'echo %uuidver% > src/main/webapp/version.html'
        	    }
         }
 	stage('Build') {
