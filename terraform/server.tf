@@ -7,8 +7,24 @@ resource "aws_key_pair" "mykey1112" {
   public_key = tls_private_key.my_key.public_key_openssh
   }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]//Amazon Linux ubuntu
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
  resource "aws_instance" "server" {
-   ami           = "ami-05fa00d4c63e32376"
+   ami           = "ami-05fa00d4c63e32376" // can use data.aws_ami.ubuntu.id also but here i will use Amazon Linux 2
    key_name	= aws_key_pair.mykey1112.key_name
    instance_type = "t3.micro"
    subnet_id     = "${aws_subnet.public_subnet1.id}"
