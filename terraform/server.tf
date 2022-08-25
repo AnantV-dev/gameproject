@@ -27,17 +27,10 @@ data "aws_ami" "ubuntu" {
    ami           = data.aws_ami.ubuntu.id
    key_name	= aws_key_pair.mykey1112.key_name
    instance_type = "t3.micro"
-   user_data=<<-EOF
-   #!/bin/bash
-   sudo amazon-linux-extras install tomcat8.5 -y
-   sudo systemctl enable tomcat
-   sudo systemctl start tomcat
-   sudo cp /tmp/gaming.war /usr/share/tomcat/webapps/gaming.war
-   EOF
-
    subnet_id     = "${aws_subnet.public_subnet1.id}"
    associate_public_ip_address = true
    vpc_security_group_ids = [aws_security_group.ec2.id]
+   user_data = data.template_file.asg_init.rendered
 
    tags = {
      Name = "Nginx-webserver"
@@ -97,6 +90,10 @@ resource "null_resource" "copy_file" {
     }
   
     depends_on = [ aws_instance.server ]
+}
+
+data "template_file" "asg_init" {
+  template = file("${path.module}/userdata.tpl")
 }
 
 output "DNS" {
