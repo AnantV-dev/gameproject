@@ -51,7 +51,7 @@ pipeline {
 			withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'access'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'secret')]) {
 				bat '''cd terraform
 				terraform init
-				terraform plan
+				terraform plan -out tfplan
 				terraform apply  -auto-approve'''	
 			}
 				
