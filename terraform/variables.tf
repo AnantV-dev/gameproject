@@ -2,6 +2,14 @@ variable "region" {
   description = "default region"
 }
 
+variable "access" {
+  description = "access"
+}
+
+variable "secret" {
+  description = "secret"
+}
+
 variable "environment" {
   description = "The Deployment environment"
 }
