@@ -1,5 +1,5 @@
-output "DNS" {
-  value = aws_instance.server.public_ip
+output "public_dns" {
+  value = aws_instance.server.public_dns
 }
 
 output "aws_link" {
@@ -7,5 +7,5 @@ output "aws_link" {
 }
 
 output "instance_ip_addr" {
-  value = aws_instance.server.private_ip
+  value = aws_instance.server.public_ip
 }
