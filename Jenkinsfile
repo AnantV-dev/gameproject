@@ -72,9 +72,13 @@ pipeline {
         }
 	    
 	     stage('Acceptance Test') {
-		    bat '''cd terraform
-		           FOR /F "tokens=*" %a in ('terraform output -raw public_dns') do SET url=%a
-			   curl -s -o /dev/null -w "%{http_code}" %url%'''
+		      steps {
+			    bat '''cd terraform
+				   FOR /F "tokens=*" %a in ('terraform output -raw public_dns') do SET url=%a
+				   curl -s -o /dev/null -w "%{http_code}" %url%
+				   FOR /F "tokens=*" %a in ('curl %url%/version.html') do SET version=%a
+				   if %uuidver%==%version% (echo "Latest version") else (echo "Older version")'''
+		      }
 	     }
 	     
     }
