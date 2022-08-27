@@ -70,6 +70,12 @@ pipeline {
 				
 	      }
         }
+	    
+	     stage('Acceptance Test') {
+		    bat '''cd terraform
+		           FOR /F "tokens=*" %a in ('terraform output -raw public_dns') do SET url=%a
+			   curl -s -o /dev/null -w "%{http_code}" %url%'''
+	     }
 	     
     }
 	
