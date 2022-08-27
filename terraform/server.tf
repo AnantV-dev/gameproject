@@ -47,7 +47,6 @@ resource "aws_security_group" "ec2" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    description = "HTTP"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
