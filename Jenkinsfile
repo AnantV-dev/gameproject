@@ -40,9 +40,16 @@ pipeline {
 					 }
 				}
 				
-				bat 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_gaming:latest'
+				
 			   }
 		 }
+		
+		stage('Docker Tomcat server') {
+			      steps {
+					bat 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_gaming:latest'
+			    }
+			}
+			   
 	 stage('Docker Cleanup') {
               steps {
                 		bat 'docker stop mytomcat'
