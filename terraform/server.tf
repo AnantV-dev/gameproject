@@ -26,6 +26,7 @@ data "aws_ami" "ubuntu" {
  resource "aws_instance" "server" {
    ami           = "ami-05fa00d4c63e32376" // can use data.aws_ami.ubuntu.id also but here i will use Amazon Linux 2
    key_name	= aws_key_pair.mykey1112.key_name
+   iam_instance_profile = "${aws_iam_instance_profile.ec2_profile.name}"
    instance_type = "t3.micro"
    subnet_id     = "${aws_subnet.public_subnet1.id}"
    associate_public_ip_address = true
